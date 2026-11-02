@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 from typing import TypedDict, Annotated, Sequence, List
 
@@ -169,6 +170,11 @@ graph.add_edge("retriever_agent", "llm")
 graph.set_entry_point("llm")
 
 rag_agent = graph.compile()
+
+png = rag_agent.get_graph().draw_mermaid_png()
+output_path = Path(__file__).with_name("RAG_agent_architecture.png")
+output_path.write_bytes(png)
+print(f"Architecture saved to: {output_path}")
 
 
 def running_agent():

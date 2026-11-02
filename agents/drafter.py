@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Annotated, Sequence, List, TypedDict
 from dotenv import load_dotenv
 
@@ -142,6 +143,11 @@ graph.add_conditional_edges(
 )
 
 app = graph.compile()
+
+png = app.get_graph().draw_mermaid_png()
+output_path = Path(__file__).with_name("Drafter_architecture.png")
+output_path.write_bytes(png)
+print(f"Architecture saved to: {output_path}")
 
 
 def run_document_agent():

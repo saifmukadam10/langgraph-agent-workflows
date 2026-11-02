@@ -104,3 +104,13 @@ inputs = {
     ]
 }
 print_stream(app.stream(inputs, stream_mode="values"))
+
+from pathlib import Path
+from IPython.display import Image, display
+
+png = app.get_graph().draw_mermaid_png()
+output_path = Path("ReAct_agent_architecture.png")
+output_path.write_bytes(png)
+
+display(Image(data=png))
+print(f"Saved to: {output_path.resolve()}")
